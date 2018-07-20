@@ -313,8 +313,8 @@ DeptClientService中有服务dwon掉了，我们就找DeptClientServiceFallBackF
 <dependencies>
 		<!-- 自己定义的api -->
 		<dependency>
-			<groupId>com.haoge.springCloud</groupId>
-			<artifactId>firstMainCloud-api</artifactId>
+			<groupId>com.haoge.cloud</groupId>
+			<artifactId>springcloud-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -470,8 +470,8 @@ public class DeptConsumer_DashBoard_App {
 		</dependency>
 		<!-- 日常标配 -->
 		<dependency>
-			<groupId>com.haoge.springCloud</groupId>
-			<artifactId>firstMainCloud-api</artifactId>
+			<groupId>com.haoge.cloud</groupId>
+			<artifactId>springcloud-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
