@@ -282,10 +282,10 @@ docker images
 
 参数：
 
-| 参数       | 释义               | 示例             |
-| ---------- | ------------------ | ---------------- |
+| 参数         | 释义        | 示例               |
+| ---------- | --------- | ---------------- |
 | -a         | 列出本地所有镜像层 | docker images -a |
-| -q         | 只显示镜像ID       | docker images -q |
+| -q         | 只显示镜像ID   | docker images -q |
 | --digests  | 显示镜像的摘要信息 |                  |
 | --no-trunc | 显示完整的镜像信息 |                  |
 
@@ -302,10 +302,10 @@ docker images -qa    返回本地所有镜像的ID
 docker search [OPTIONS]镜像名称
 ~~~
 
-| 参数       | 释义                            | 示例 |
-| ---------- | ------------------------------- | ---- |
-| --no-trunc | 显示完成的镜像描述              |      |
-| -s         | 列出收藏不小于指定值的镜像      |      |
+| 参数         | 释义                      | 示例   |
+| ---------- | ----------------------- | ---- |
+| --no-trunc | 显示完成的镜像描述               |      |
+| -s         | 列出收藏不小于指定值的镜像           |      |
 | -automated | 只列出automated build类型的镜像 |      |
 
 ~~~shell
@@ -347,14 +347,14 @@ docker rmi -f hello-world nginx
 
 参数：
 
-| 参数   | 释义                                           |
-| ------ | ---------------------------------------------- |
-| --name | 为容器起一个别名                               |
+| 参数     | 释义                       |
+| ------ | ------------------------ |
+| --name | 为容器起一个别名                 |
 | -d     | 后台运行容器，并且返回容器ID，即启动守护式容器 |
-| -i     | 以交互模式运行容器，通常与-t同时使用           |
-| -t     | 为容器重新分配一个输入伪终端，常与-i一起使用   |
-| -P     | 随机端口映射                                   |
-| -p     | 指定端口映射，有以下四种格式                   |
+| -i     | 以交互模式运行容器，通常与-t同时使用      |
+| -t     | 为容器重新分配一个输入伪终端，常与-i一起使用  |
+| -P     | 随机端口映射                   |
+| -p     | 指定端口映射，有以下四种格式           |
 
 ip:hostPort:containerPort
 
@@ -371,7 +371,7 @@ docker run -it 49f7960eb7e4	#启动交互式容器
 docker run -d 容器ID或容器名 #启动守护式容器
 ~~~
 
-![1532572018565](E:\学习笔记\docker\1532572018565.png)
+![1532572018565](/images/1532572018565.png)
 
 ###### 2. docker ps
 
@@ -473,11 +473,11 @@ docker cp f48a49415cd8:/tmp/yum.log /root
 
 ###### 13 常用命令总结
 
-![1532575216595](E:\学习笔记\docker\1532575216595.png)
+![1532575216595](/images/1532575216595.png)
 
-![1532575233363](E:\学习笔记\docker\1532575233363.png)
+![1532575233363](/images/1532575233363.png)
 
-![1532576314306](E:\学习笔记\docker\1532576314306.png)
+![1532576314306](/images/1532576314306.png)
 
 #### 四、docker镜像
 
@@ -487,13 +487,13 @@ docker cp f48a49415cd8:/tmp/yum.log /root
 
 ###### 2. 联合文件系统
 
-![1532594400318](E:\学习笔记\docker\1532594400318.png)
+![1532594400318](/images/1532594400318.png)
 
 ###### 3. docker镜像加载原理
 
-![1532594471581](E:\学习笔记\docker\1532594471581.png)![1532594481850](E:\学习笔记\docker\1532594481850.png)
+![1532594471581](/images/1532594471581.png)![1532594481850](/images/1532594481850.png)
 
-![1532594501669](E:\学习笔记\docker\1532594501669.png)
+![1532594501669](/images/1532594501669.png)
 
 ###### 4. docker镜像采用分层结构好处
 
@@ -541,7 +541,7 @@ docker run -d -p 8886:8080 tomcat
 
 有点类似我们redis中的rdb和aof文件
 
-![1532596258776](E:\学习笔记\docker\1532596258776.png)
+![1532596258776](/images/1532596258776.png)
 
 ##### 2.作用
 
@@ -549,7 +549,7 @@ docker run -d -p 8886:8080 tomcat
 
 可以使容器间继承和共享数据
 
-![1532596389508](E:\学习笔记\docker\1532596389508.png)
+![1532596389508](/images/1532596389508.png)
 
 ##### 3.容器内添加数据卷
 
@@ -572,7 +572,7 @@ docker run -it -v /hostVolume:/containerVolume centos
 docker inspect 6cd97d1e3261
 ~~~
 
-![1532597040559](E:\学习笔记\docker\1532597040559.png)
+![1532597040559](/images/1532597040559.png)
 
 最终效果：宿主机上的hostVolume和容器中的containerVolume中的文件完全同步。
 
@@ -600,7 +600,7 @@ docker run -it -v /hostVolume:/containerVolume：ro centos
 
 **查看带权限的数据卷是否挂载成功**
 
-![1532598417347](E:\学习笔记\docker\1532598417347.png)
+![1532598417347](/images/1532598417347.png)
 
 **常见错误**
 
@@ -641,7 +641,7 @@ CMD /bin/bash
 docker build -f /mydocker/dockerFile -t lidonghao/centos01 .
 ~~~
 
-![1532656312161](E:\学习笔记\docker\1532656312161.png)
+![1532656312161](/images/1532656312161.png)
 
 ##### 4.数据卷容器
 
@@ -697,5 +697,414 @@ LABEL name="CentOS Base Image" \
 
 # Default command
 CMD ["/bin/bash"]
+~~~
+
+##### 2.基本知识
+
+1.每个保留字指令都必须为大写字母并且后面要跟随至少一个参数
+
+2.指令按照从上到下，顺序执行
+
+3.#表示注释
+
+4.每条指令都会创建一个新的镜像层，并对镜像进行提交。
+
+##### 3.docker执行Dockerfile的大致流程
+
+1.docker从基础镜像运行一个容器
+
+2.执行一条指令并且对容器进行修改
+
+3.执行类似docker commit的操作提交一个新的镜像层
+
+4.docker再基于刚才提交的镜像运行一个新的容器
+
+5.重复上述过程直到所有指令都执行完成
+
+**总结**
+
+![1532744851(1)](/images/1532744851(1).png)
+
+![1532744912(1)](/images/1532744912(1).jpg**)
+
+##### 4. Dockerfile体系结构（保留字）
+
+**FROM：**+基础镜像，表示新镜像是基于哪个镜像来的
+
+**MAINTAINER：**镜像维护者的姓名和邮箱地址
+
+**RUN：**容器构建时需要运行的命令
+
+**EXPOSE：**当前容器对外暴露的端口
+
+**WORKDIR：**制定再容器创建之后，终端默认登陆进来的工作目录，一个落脚点
+
+**ENV：**用来在构建镜像过程中设置环境变量
+
+**ADD：**将宿主机目录下的文件拷贝至镜像并且add命令会自动 处理url和解压tar压缩包
+
+**COPY：**类似ADD命令，拷贝文件和目录到镜像中。将从构建上下文目录中（源路径）的文件/目录复制到新的层镜像内的\<目标路径\>位置
+
+格式：copy src dest
+
+​	copy ["src","dest"]	
+
+**VOLUME：**容器数据卷，用于数据保存和数据持久化的工作
+
+**CMD：**制定一个容器启动的时候需要运行的命令，Dockerfile 中可以有多个CMD命令，但是只有最后一个生效，CMD会被docker run 之后参数所替换
+
+注：CMD容器启动命令的格式和run相似，也是两种格式：
+
+- shell格式：CMD命令
+- exec格式：CMD ["可执行文件","参数1","参数2"...]
+- 参数格式列表：CMD ["参数1","参数2"...]，在制定了ENTRYPOINT指令后，用CMD制定具体的参数
+
+**ENTRYPOINT：**制定一个容器启动的时候要运行的具体命令，和CMD命令一样，都是制定容器启动时命令及参数
+
+**ONBUILD：**当构建一个被继承的Dockerfile 时运行的命令，父镜像在被子继承后，父镜像的ONBUILD被触发
+
+**总结：**
+
+![2018-07-29_075100](/images/2018-07-29_075100.png)
+
+##### 5. Dockerfile使用例子 
+
+Docker Hub 中99%的镜像都是通过在base镜像中安装和配置需要的软件构建出来的
+
+###### 1. 自定义镜像mycentos
+
+**编写Dockerfile文件**
+
+~~~dockerfile
+FROM centos
+MAINTAINER lidonghao<861914994@qq.com>
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+RUN yum -y install vim
+RUN yum -y install net-tools
+EXPOSE 80
+CMD echo $MYPATH
+CMD echo "successful ........"
+CMD /bin/bash
+~~~
+
+**构建**
+
+~~~shell
+docker build -f Dockerfile -t mycentos:1.3 .
+docker build -f mycentos_dockerfile -t mycentos:1.3 .
+~~~
+
+构建成功
+
+![1532827290(1)](/images/1532827290(1).png)
+
+**运行**
+
+~~~shell
+docker  run -it mycentos:1.3
+~~~
+
+~~~shell
+#列出镜像的变更历史命令
+docker history 镜像名称
+~~~
+
+###### 2. CMD/ENTRYPOINT 
+
+这两个命令都是制定一个容器启动 时需要运行的命令
+
+**CMD命令**
+
+Dockerfile中可以有多个CMD命令，但是只有最后一个会生效，CMD命令会被docker run 之后的参数替换
+
+**测试：**tomcat的Dockerfile文件最后一行为`CMD ["catalina.sh", "run"]`,正常运行tomcat `docker run -it -p 8888:8080 tomcat`会打印tomcat的日志，但是我们运行命令	`docker run -it -p 8888:8080 tomcat ls -l` 则会列出当工作目录下的文件。这个时候 ls -l 即为docker run 之后的参数。
+
+**ENTRYPOINT命令**
+
+docker run 之后的参数会当作参数传递给ENTRYPOINT,之后形成新的命令组合。
+
+**测试：**制作可以查询IP的容器
+
+**编写Dockerfile文件**
+
+~~~dockerfile
+FROM centos
+RUN yum install -y curl
+CMD ["curl","-s","http://ip.cn"]
+~~~
+
+**构建**
+
+~~~shell
+docker build -f ip_dockerfile -t myip .
+~~~
+
+**运行**
+
+~~~shell
+docker run -it myip
+~~~
+
+**CURL命令说明：**
+
+![2018-07-27_140929](/images/2018-07-27_140929.png)
+
+如果我们还想显示文件头，这个时候就需要加上-i参数
+
+~~~shell
+curl -s -i http://ip.cn
+~~~
+
+但是这个时候在`docker run -it myip`之后加上 -i参数会报错，因为我们在dockerfile中使用的时CMD,加上 -i参数之后会替换 dockerfile 文件中的CMD命令。这个时候我们在dockerfile文件中改用ENTRYPOINT命令。他会将我们传的 -i参数拼接在 ENTRYPOINT 命令中形成新的命令，并且执行。
+
+编写ENTRYPOINT版的dockerfile
+
+~~~dockerfile
+FROM centos
+RUN yum install -y curl
+ENTRYPOINT ["curl","-s","http://ip.cn"]
+~~~
+
+构建
+
+~~~shell
+docker build -f ip_dockerfile2 -t myip2 .
+~~~
+
+运行
+
+~~~shell
+docker run myip2		#不显示文件头
+docker run myip2 -i   #显示文件头
+~~~
+
+###### 3. ONBUILD示例
+
+构建父镜像：
+
+（1）dockerfile
+
+~~~dockerfile
+FROM centos
+RUN yum install -y curl
+ENTRYPOINT ["curl","-s","http://ip.cn"]
+ONBUILD RUN echo "this is father images........"
+~~~
+
+(2)构建
+
+~~~shell
+docker build -f father_dockerfile -t father .
+~~~
+
+(3)运行
+
+~~~shell
+docker run father
+~~~
+
+构建子镜像：
+
+（1）dockerfile
+
+```dockerfile
+FROM father
+RUN yum install -y curl
+ENTRYPOINT ["curl","-s","http://ip.cn"]
+```
+
+(2)构建
+
+```shell
+docker build -f son_dockerfile -t son .
+```
+
+***构建子镜像的时候会执行父镜像dockerfile文件中的ONBUILD命令***
+
+(3)运行
+
+```shell
+docker run son
+```
+
+###### 4. 自定义tomcat
+
+1.编写Dockerfile文件(文件名称Dockerfile)
+
+~~~dockerfile
+#基础镜像为centos
+FROM centos
+#设置维护者及维护者邮箱
+MAINTAINER lidonghao<861914994@qq.com>
+#将aa.txt文件拷贝至容器中/usr/local文件夹下并且改名为mm.txt
+COPY aa.txt /usr/local/mm.txt
+#将tomcat和jdk压缩包拷贝至容器中/usr/local下并且解压
+ADD apache-tomcat-8.0.26.tar.gz /usr/local/
+ADD jdk-8u60-linux-x64.gz /usr/local/
+#安装vim工具
+RUN yum -y install vim
+#设置环境变量
+ENV MYPATH /usr/local
+#制定工作目录
+WORKDIR $MYPATH
+#设置jdk和tomcat的环境变量
+ENV JAVA_HOME /usr/local/jdk1.8.0_60
+ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+ENV CATALINA_HOME /usr/local/apache-tomcat-8.0.26
+ENV CATALINA_BASE /usr/local/apache-tomcat-8.0.26
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
+#制定对外暴露端口为8080
+EXPOSE 8080
+#制定容器启动的时候启动tomcat并且打印日志
+CMD /usr/local/apache-tomcat-8.0.26/bin/startup.sh && tail -F /usr/local/apache-tomcat-8.0.26/bin/logs/catalina.out
+~~~
+
+2.构建
+
+~~~shell
+docker build -t ldhtomcat9 .
+~~~
+
+这儿dockerfile文件名称为Dockerfile，所以不需要我们使用-f参数进行dockerfile文件的指定
+
+3.运行
+
+~~~shell
+#-v设置容器卷
+docker run -d -p 8089:8080 --name mytomcat99 -v /data/docker/app/mytomcat9/test:/usr/local/apache-tomcat-8.0.26/webapps/test -v /data/docker/app/mytomcat9/logs/:/usr/local/apache-tomcat-8.0.26/logs --privileged=true ldhtomcat9
+~~~
+
+4.查看
+
+~~~shell
+docker exec e117d8c99d9c java -version
+docker exec e117d8c99d9c pwd
+docker exec e117d8c99d9c ls -l
+docker exec e117d8c99d9c cat mm.txt
+~~~
+
+5.web项目的发布
+
+在/data/docker/app/mytomcat9/test目录下分别创建a.jsp文件和WEB-INF文件夹，在WEB-INF文件夹中创建web.xml文件
+
+web.xml
+
+~~~xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+<display-name>test</display-name>
+</web-app>
+~~~
+
+a.jsp
+
+~~~jsp
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>测试页面</title>
+</head>
+<body>
+----------------welocme--------------------
+<%="I am in docker tomcat"%>
+  <br>
+  <br>
+  <% System.out.println("Hello World");%>
+  </body>
+</html>
+~~~
+
+然后重启mytomcat99`docker restart d0a77d8ce634`
+
+浏览器访问http://47.105.103.45:8089/test/a.jsp
+
+###### 5.docker上安装mysql
+
+~~~shell
+docker run -p 3306:3306 --name mysql \
+-v /data/docker/app/mysql5.6/conf:/etc/mysql/conf.d \
+-v /data/docker/app/mysql5.6/logs:/logs \
+-v /data/docker/app/mysql5.6/data:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+~~~
+
+![2018-07-27_151904](/images/2018-07-27_151904.png)
+
+安装完执行`docker exec -it 15a4658343ff /bin/bash`进入交互式
+
+~~~shell
+mysql -uroot -p   #连接mysql
+~~~
+
+数据库备份命令测试
+
+~~~shell
+docker exec 15a4658343ff sh -c 'exec mysqldump --all-databases -uroot -p "123456"'> /data/docker/app/mysql5.6/all-database.sql
+~~~
+
+6.docker上安装redis
+
+~~~shell
+docker run -p 6379:6379 -v /data/docker/app/myredis/data:/data -v /data/docker/app/myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf -d redis redis-server /usr/local/etc/redis/redis.conf --appendonly yes
+~~~
+
+在主机/data/docker/app/myredis/conf/redis.conf文件夹下新建文件redis.conf。这个是redis的配置文件
+
+连接redis:docker exec -it 7c4d512635a9 redis-cli
+
+退出redis   shutdown
+
+/data/docker/app/myredis/data 目录下是redis中数据存放的位置。
+
+#### 七、将本地镜像推送到阿里云
+
+##### 1.根据容器创建镜像
+
+~~~shell
+docker commit -a ldh -m "new vim centos 1.4" b5ba2cd1f8c7 mycentos:1.4
+~~~
+
+查看我们新生成的镜像
+
+dockers ps
+
+运行 docker run -it mycentos:1.4
+
+##### 2.将本地镜像推送至阿里云	
+
+登陆阿里云镜像仓库管理控制台https://cr.console.aliyun.com
+
+创建镜像仓库的时候代码源暂时选择本地仓库
+
+步骤：
+1.登陆阿里云
+
+~~~shell
+sudo docker login --username=lidonghao4 registry.cn-hangzhou.aliyuncs.com
+~~~
+
+2.
+
+~~~shell
+sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/lidonghao/mycentos:[镜像版本号]   #命令模板
+~~~
+
+~~~shell
+docker tag 532033853ef3 registry.cn-hangzhou.aliyuncs.com/lidonghao/mycentos:1.4		#命令示例
+~~~
+
+3.
+
+~~~shell
+sudo docker push registry.cn-hangzhou.aliyuncs.com/lidonghao/mycentos:[镜像版本号]	#命令模板
+~~~
+
+~~~shell
+#命令示例
+docker push registry.cn-hangzhou.aliyuncs.com/lidonghao/mycentos:1.4
 ~~~
 
