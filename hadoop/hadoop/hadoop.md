@@ -49,7 +49,7 @@ sbin/yarn-daemon.sh start nodemanager
 
 http://192.168.23.129:50070/explorer.html#
 
-![1533264754983](E:\GitHub\StudyNotes\hadoop\hadoop\1533264754983.png)
+![1533264754983](/images/1533264754983.png)
 
 创建输入文件夹
 
@@ -77,9 +77,36 @@ http://192.168.23.129:50070/explorer.html#/user/ldh/output
 
 
 
-查看上传的文件命令
+##### 二、集群成功启动的必要条件
 
-hadoop fs -lsr /
+###### 1.ssh免密登陆配置成功
 
+配置hadoop102的ldh和root账号到hadoop102,hadoop103,hadoop104的免密登陆。配置hadoop103的ldh账号到hadoop102,hadoop103,hadoop104的免密登陆。
 
+配置ssh免密登陆的步骤
+
+~~~shell
+#进入家目录
+cd 
+#进入.ssh目录，如果没有，则手动ssh别的服务器就会产生
+cd .ssh
+#生成公匙和私匙
+ssh-keygen -t rsa
+#拷贝公匙到指定的服务器
+ssh-copy-id hadoop102
+~~~
+
+###### 2.必须保证文件权限
+
+保证hadoop102,hadoop103,hadoop104三个节点中/opt/module/hadoop-2.7.2目录下的所有文件所属用户和组都是ldh账号
+
+重新分配所属用户和组的命令
+
+~~~shell
+chown ldh:ldh -R /opt/
+~~~
+
+###### 3. 集群无之前数据
+
+删除/opt/module/hadoop-2.7.2目录下的data和log文件夹
 
