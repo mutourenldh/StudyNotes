@@ -840,3 +840,269 @@ Fork/Join 框架：就是在必要的情况下，将一个大任务，进行拆�
 	}
 ```
 
+#### 2.时间日期API
+
+LocalDate,LocalTime,LocalDateTime是不可变的实例对象，是线程安全的。他们提供了简单的时间日期，并不包含当前的时间信息，也不包含与时区相关的信息。
+
+###### 1.提供的方法
+
+- now()：静态方法。根据当前时间创建对象
+
+  ~~~java
+  LocalDate localDate=LocalDate.now();
+  LocalTime time2 = LocalTime.now();
+  LocalDateTime time3 = LocalDateTime.now();
+  ~~~
+
+- of()：静态方法。根据指定时间/日期创建对象
+
+  ~~~java
+   LocalDate of = LocalDate.of(2019, 2, 2);
+   LocalTime of1 = LocalTime.of(12, 12, 12);
+   LocalDateTime of2 = LocalDateTime.of(2019, 2, 2, 2, 2, 2);
+  ~~~
+
+- plusDays,plusWeeks,plusMonths,plusYears      
+
+  plus方法：从当前对象添加几天，几周，几年，几分钟，几小时等
+
+- minus开头的方法：与plus开头的方法相反，从当前对象减去几天，几年，几分钟，几小时等
+
+- withDayOfMonth 将指定的属性值修改为指定的值并且返回新的对象
+
+- getDayOfMonth,getDayOfYear 等方法，获得月份天数，获得年份天数
+
+- getMonth 获得月份的month枚举值
+
+- isBefore , isAfter 比较两个LocalDate对象
+
+- isLeapYear  判断是否是闰年
+
+###### 2.Instant时间戳
+
+~~~java
+		Instant ins1 = Instant.now();
+		System.out.println(ins1);
+		//对该时间偏离的时区数
+		OffsetDateTime odt = 									ins1.atOffset(ZoneOffset.ofHours(8));
+		System.out.println(odt);
+		//显示从1970年到指定时间的毫秒数
+		System.out.println(ins1.toEpochMilli());
+		//显示从1970年增加多长的时间
+		Instant ins2 = Instant.ofEpochSecond(60);
+		System.out.println(ins2);
+~~~
+
+###### 3.duration和period
+
+duration:计算两个时间之间的间隔
+
+period:计算两个日期之间的间隔
+
+~~~java
+//Duration测试
+Instant ins1 = Instant.now();
+		try {
+			Thread.sleep(1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Instant ins2 = Instant.now();
+		//Duration 计算两个时间之间的间隔
+		Duration between = Duration.between(ins1, ins2);
+		System.out.println(between.toMillis());
+		System.out.println("-------------------------");
+		LocalTime date1 = LocalTime.now();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		LocalTime date2 = LocalTime.now();
+		System.out.println(Duration.between(date1,date2).toMillis());
+~~~
+
+~~~java
+//Period测试
+		LocalDate date1 = LocalDate.of(2015, 1, 1);
+		LocalDate date2 = LocalDate.now();
+		Period between = Period.between(date1, date2);
+		System.out.println(between);
+		System.out.println(between.getYears());
+		System.out.println(between.getMonths());
+		System.out.println(between.getDays());
+~~~
+
+###### 4.TemporalAdjuster
+
+TemporalAdjuster：时间矫正器 有时候我们可能需要获取例如：将星期调整到下个周日等操作
+
+TemporalAdjusters：该类通过静态方法提供了大量的常用TemporalAdjuster的实现
+
+~~~java
+	@Test
+	public void test5() {
+		LocalDateTime ldt1 = LocalDateTime.now();
+		System.out.println(ldt1);
+
+		LocalDateTime ldt2 = ldt1.withDayOfMonth(10);
+		System.out.println(ldt2);
+		//获取当前日期的下一个周日
+		LocalDateTime ldt3 = ldt1.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+		System.out.println(ldt3);
+
+		//自定义：下一个工作日
+		LocalDateTime ldt5 = ldt1.with((l) -> {
+			LocalDateTime ldt4 = (LocalDateTime) l;
+			DayOfWeek dayOfWeek = ldt4.getDayOfWeek();
+			if (dayOfWeek.equals(DayOfWeek.FRIDAY)) {
+				return ldt4.plusDays(3);
+			} else if (dayOfWeek.equals(DayOfWeek.SUNDAY)) {
+				return ldt4.plusDays(2);
+			} else {
+				return ldt4.plusDays(1);
+			}
+		});
+		System.out.println(ldt5);
+	}
+~~~
+
+###### 5.DateTimeFormatter
+
+```
+DateTimeFormatter:格式化时间/日期
+@Test
+	public void test6() {
+		DateTimeFormatter dtf=DateTimeFormatter.ISO_DATE;
+		LocalDateTime ldt = LocalDateTime.now();
+
+		String strDate = ldt.format(dtf);
+		System.out.println(strDate);
+
+		System.out.println("---------------------------");
+
+		DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
+
+		String strDate2 = dtf2.format(ldt);
+		System.out.println(strDate2);
+
+		LocalDateTime parse = ldt.parse(strDate2, dtf2);
+		System.out.println(parse);
+	}
+```
+
+###### 6.时区处理
+
+```java
+//java8中加入了对时区的支持，带时区的时间ZonedDate,ZonedTime,ZonedDateTime
+//Zoneld:该类中包含了所有时区的信息
+//getAvailableZonelds() 可以获取所有时区信息
+//of(id) 用指定的时区信息获取Zoneld对象
+	@Test
+	public void test7(){
+		Set<String> set = ZoneId.getAvailableZoneIds();
+		set.forEach(System.out::println);
+	}
+	@Test
+	public void test8(){
+		LocalDateTime ldt = LocalDateTime.now(ZoneId.of("Europe/Tallinn"));
+		System.out.println(ldt);
+		ZonedDateTime zonedDateTime = ldt.atZone(ZoneId.of("Asia/Shanghai"));
+		System.out.println(zonedDateTime);
+	}
+```
+
+###### 7.与传统日期类的转换
+
+java.time.Instant和java.util.Date可以相互转
+
+~~~java
+// 		java.time.Instant和java.util.Date可以相互转
+        Date date = new Date();
+        Instant instant = date.toInstant();
+        Date from = Date.from(instant);
+//      Instant和TimeStamp相互转换
+        Timestamp timestamp = new Timestamp(2019);
+        Instant instant1 = timestamp.toInstant();
+        Timestamp from1 = Timestamp.from(instant1);
+//      LocalDate和Date
+        LocalDate now = LocalDate.now();
+        java.sql.Date date1 =java.sql.Date.valueOf(now);
+        LocalDate localDate = date1.toLocalDate();
+        //LocalTime和java.sql.Time
+        LocalTime now1 = LocalTime.now();
+        Time time = Time.valueOf(now1);
+        LocalTime localTime = time.toLocalTime();
+        //java.time.format.DateTimeFormatter和java.text.DateFormat
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-DD HH:mm:ss");
+        Format format1 = format.toFormat();
+
+~~~
+
+##### 3.接口中的静态方法和默认方法
+
+###### 1.默认方法
+
+java8中允许接口中包含具有具体实现的方法，该方法称为默认方法。默认方法使用 default 关键字修饰。
+
+类优先原则
+
+ 1.如果一个类，既继承了父类A，又实现了接口B，并且父类A和接口B中有一个同名方法，则调用该类中的这个方法时，实际调用的是父类中的该实现方法。接口中的同名方法会被忽略
+ 2.如果一个类实现了两个接口A和B，并且A和B中有一个同名和同参的方法，则在该类中必须覆盖这个方法来解决冲突
+
+###### 2.静态方法
+
+接口中允许添加静态方法
+
+~~~java
+public interface MyInterface {
+	default String getName() {
+		return "lidonghao";
+	}
+	public static void show() {
+		System.out.println("接口中的静态方法");
+	}
+}
+~~~
+
+##### 4.Optional类
+
+java.util.Optional是一个容器 类，用来表示一个值存在或者不存在。原来用null来表示一个值不存在，现在我们使用Optional可以更好的表达这个概念。并且可以避免空指针异常。
+
+常用方法如下：
+
+~~~java
+//		1.of方法，创建一个optional实例
+		Optional<String> opt1 = Optional.of("123");
+		System.out.println(opt1.get());
+//		2.empty()方法，创建一个空的optional实例
+		Optional<Employee> opt2 = Optional.empty();
+//		System.out.println(opt2.get());
+//		3.ofNullable<T t>方法  如果t不为空，则创建optional实例，否则创建空实例 
+		Optional<String> opt3 = Optional.ofNullable("456");
+//		System.out.println(opt3.get());
+//		4.isPresent()方法判断是否包含值
+//		System.out.println(opt3.isPresent());
+//		System.out.println(opt2.isPresent());
+		//orElse(T t) 如果调用对象包含值，则返回该值。否则返回t
+		Employee orElse = opt2.orElse(new Employee());
+		System.out.println(orElse);
+		//orElseGet(Supplier s) 如果调用对象包含值，则返回该值，否则返回s获取的值
+		Employee orElseGet = opt2.orElseGet(() -> new Employee("123"));
+		System.out.println(orElseGet);
+//		map(Function f)如果有值对其进行处理，并返回处理后的optional,否则返回Optional.empty()
+//		flatMap(Function mapper) 与map类似，要求返回的值必须是Optional
+~~~
+
+~~~java
+//1.of方法，创建一个optional实例
+		Optional<Employee> ofNullable = Optional.ofNullable(new Employee("倩宝贝", 18));
+//		map(Function f)如果有值对其进行处理，并返回处理后的optional,否则返回Optional.empty()
+//		Optional<String> map = ofNullable.map(e -> e.getName());
+//		System.out.println(map.get());
+
+//		flatMap(Function mapper) 与map类似，要求返回的值必须是Optional
+		Optional<String> flatMap = ofNullable.flatMap(e -> Optional.of(e.getName()));
+		System.out.println(flatMap.get());
+~~~
+
